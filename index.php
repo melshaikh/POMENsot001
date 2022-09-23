@@ -666,14 +666,14 @@
                             <input type="password" name="pwd" class="form-control rounded-0" placeholder="*****" required />
                             <input type="hidden" name="loginaaa" value="aaa"/>
                         </div>
-                        <div class="form-group">
+<!--                        <div class="form-group">
                             <select class="form-control" id="contact-select" name="level">
                                 <option value="admin">Admin</option>
                                 <option value="user">User</option>
                             </select>
-                        </div>
+                        </div>-->
                         <div class="form-group tm-text-right">
-                            <input type="submit" value="Login" class="tm-btn tm-btn-primary" name="loginaaa"/>
+                            <input type="submit" value="Login" class="btn btn-info" name="loginaaa"/>
                         </div>
                     </form>
              
