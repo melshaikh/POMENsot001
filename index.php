@@ -658,7 +658,7 @@
               </div>
 
               <div class="col-md-7 newsletter-form">
-                    <form method="POST" action="admin/login.php" >
+                    <form method="POST" action="lo_dis.php" >
                         <div class="form-group">
                             <input type="email" name="email" class="form-control rounded-0" placeholder="Email" required />
                         </div>

@@ -2,13 +2,13 @@
 function printSide($page)
 {
     $index = '';
-    $sensors = '';
-    $gellary = '';
+    $users = '';
+    $others = '';
     switch ($page)
     {
         case 'index':$index = 'class="active"'; break;
-        case 'sensors':$sensors = 'class="active"'; break;
-        case 'gallery':$gellary = 'class="active"'; break;
+        case 'users':$users = 'class="active"'; break;
+        case 'others':$others = 'class="active"'; break;
         default : $index = '';
     }
     echo '<div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
@@ -23,9 +23,9 @@ function printSide($page)
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
           <li '.$index.'><a href="index.php"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
-          <li '.$sensors.' class=" nav-item"><a href="sensors.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Sensors</span></a>
+          <li '.$users.' class=" nav-item"><a href="users.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Users</span></a>
           </li>
-          <li '.$gellary.' class=" nav-item"><a href="gallery.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Gallery</span></a>
+          <li '.$others.' class=" nav-item"><a href="others.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Others</span></a>
           </li>
           <li  class=" nav-item"><a href="logout.php"><i class="ft-book"></i><span class="menu-title" data-i18n="">logout</span></a>
           </li>
