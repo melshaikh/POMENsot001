@@ -76,19 +76,18 @@
             
             ?>
 <div class="row">
+    <?php if(isset($_POST['user_id']))$user = getUserByID($_POST['user_id']);
+        elseif(isset ($_GET['user_id']))$user = getUserByID($_GET['user_id']);
+        elseif(isset($_POST['user_id2']))$user = getUserByID($_POST['user_id2']); ?>
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Sensors List</h4>
-                                <p>
+				<h4 class="card-title"><?php echo $user['name']; ?></h4>
+                                <p> User Profile
                                     <?php 
-                                    if(isset($_POST['user_id2'])) if(!is_null($sql)) echo $sql; else   echo 'sql is null';
+//                                    if(isset($_POST['user_id2'])) if(!is_null($sql)) echo $sql; else   echo 'sql is null';
                                     ?>
                                 </p>
-                                <form action="user_add.php" method="POST">
-                                        <input type="hidden" name="file_id" value="12">
-                                        <input type="submit" class="btn btn-amber" name="del_file" value="Add User">
-                                    </form>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>				
 			</div>
 			<div class="card-content collapse show">
