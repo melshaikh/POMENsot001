@@ -58,9 +58,9 @@
                   case "edit name":$sql = "UPDATE `user` SET `name` = '".$_POST['val_']."' WHERE `user`.`id` = ".$_POST['user_id2'].";"; break;
                   case '1':$sql = "UPDATE `user` SET `email` = '".$_POST['val_']."' WHERE `user`.`id` = ".$_POST['user_id2'].";"; break;
                   case '0':$sql = "UPDATE `user` SET `name` = '".$_POST['val_']."' WHERE `user`.`id` = ".$_POST['user_id2'].";"; break;
-                  case '2':
-                     // $level = getAccessLevelByTypeID($_POST['val_']);
-                      $sql = "UPDATE `user` SET `type` = '".$_POST['val_']."' WHERE `user`.`id` = ".$_POST['user_id2'].";"; break;
+                  case '2': $sql = "UPDATE `user` SET `type` = '".$_POST['val_']."' WHERE `user`.`id` = ".$_POST['user_id2'].";"; break;                  
+                  case '4': $uss = hash("sha512",$sesid.'12345'); 
+                      $sql = "UPDATE `user` SET `password` = '".$uss."' WHERE `user`.`id` = ".$_POST['user_id2'].";"; break;
                 }
                 if(!is_null($sql))
                 {
@@ -95,18 +95,13 @@
 					<table class="table">
 						<thead class="thead-dark">
 							<tr>
-								<th scope="col">[User ID]</th>
-								<th scope="col">pic.</th>
-                                                                <th scope="col">Name</th>
-								<th scope="col">E-mail</th>
-                                                                <th scope="col">Type</th>
-								<th scope="col">Show</th>
+								<th scope="col"></th>
+								<th scope="col">Value</th>
+                                                                <th scope="col">Edit</th>
 							</tr>
 						</thead>
 						<tbody>
-        <?php if(isset($_POST['user_id']))$user = getUserByID($_POST['user_id']);
-        elseif(isset ($_GET['user_id']))$user = getUserByID($_GET['user_id']);
-        elseif(isset($_POST['user_id2']))$user = getUserByID($_POST['user_id2']);
+        <?php 
         $ut = getUserTypeByTypeId($user['type']);
         if(!is_null($user)){ ?>
             <tr>
@@ -175,12 +170,12 @@
                 </td>
             </tr>
             <tr>
-                <td>ID</td>
+                <td>PASSWORD</td>
                 <td>
-                    <form action="auser.php">
+                    <form action="auser.php" method="POST">
                         <input type="hidden" name="user_id2" value="<?php echo $user['id']; ?>">
-                        <input type="hidden" name="switch" value=3 >
-                        <input type="submit" class="btn btn-cyan" name="SubmitChange" value="edit name">
+                        <input type="hidden" name="switch" value=4 >
+                        <input type="submit" class="btn btn-cyan" name="SubmitChange" value="Reset to 12345">
                     </form>
                 </td>
             </tr>
