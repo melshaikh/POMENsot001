@@ -53,7 +53,10 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Sensors List</h4>
+				<h4 class="card-title">New User Form</h4>
+                                <?php if(isset($_GET['err'])){ ?> 
+                                <p><?php echo $_GET['err']; ?></p>
+                                <?php } ?>
                                 <form action="user_add.php" method="POST">
                                         <input type="hidden" name="file_id" value="12">
                                         <input type="submit" class="btn btn-amber" name="del_file" value="Add User">
@@ -63,38 +66,49 @@
 			<div class="card-content collapse show">
 				<div class="table-responsive">
 					<table class="table">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">[User ID]</th>
-								<th scope="col">pic.</th>
-                                                                <th scope="col">Name</th>
-								<th scope="col">E-mail</th>
-                                                                <th scope="col">Type</th>
-								<th scope="col">Show</th>
-							</tr>
-						</thead>
-						<tbody>
-                                                    <?php $sensor_list = getAllUsers(); 
-                                                    if(!is_null($sensor_list)){
-                                                        while($sens = $sensor_list->fetch(PDO::FETCH_ASSOC)){ 
-                                                            $ut = getUserTypeByTypeId($sens['type']); ?>
-							<tr>
-								<th scope="row"><?php echo $sens['id']; ?></th>
-                                                                <td><span class="avatar">
-                                                                        <img src="../images/userImages/<?php echo $sens['image']; ?>" alt="avatar">
-                                                                    </span></td>
-								<td><?php echo $sens['name']; ?></td>
-                                                                <td><?php echo $sens['email']; ?></td>
-								<td><?php echo $ut['disply']; ?></td>
-                                                                        <td>
-                                                                            <form action="auser.php">
-                                                                                <input type="hidden" name="user_id" value="<?php echo $sens['id']; ?>">
-                                                                                <input type="submit" class="btn btn-cyan" name="showSensor" value="Disply">
-                                                                            </form>
-                                                                        </td>
-							</tr>
-                                                    <?php } } ?>
+                                            <form action="add_user.php" method="POST">
+						<tbody>                                                
+                                                    <tr>
+                                                        <td>Name</td>
+                                                        <td><input type="text" name="name"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email</td>
+                                                        <td><input type="email" name="email"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Password</td>
+                                                        <td><input type="password" name="pwd1"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>re-Password</td>
+                                                        <td><input type="password" name="pwd2"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Type</td>
+                                                        <td>
+                                                            <select name="type_id">
+                                                                <?php $types = getAllUsersTypes(); 
+                                                                if(!is_null($types)){
+                                                                    while($atype = $types->fetch(PDO::FETCH_ASSOC)){ ?>
+                                                                <option value="<?php echo $atype['id']?>"><?php echo $atype['disply']?></option>
+                                                                <?php } } ?>
+                                                            </select></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Address</td>
+                                                        <td><input type="text" name="address"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Location Link</td>
+                                                        <td><input type="text" name="location"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td><input type="submit" name="submitOK" value="AUBMIT"></td>
+                                                    </tr>
 						</tbody>
+                                            </form>
 					</table>
 				</div>
 			</div>

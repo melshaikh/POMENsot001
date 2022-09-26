@@ -3,8 +3,8 @@
 //$db = mysqli_connect("fdb29.awardspace.net","4178737_pomendb01	","unimapintek22","4178737_pomendb01");
 try {
 $database_name     = '4178737_pomendb01';
-$database_user     = '4178737_pomendb01';
-$database_password = 'unimapintek22';
+$database_user     = 'root';
+$database_password = '';
 //$database_host     = 'fdb29.awardspace.net';
 $database_host     = 'localhost';
 $electricWeight = 1;
@@ -12,6 +12,9 @@ $pipingWeigt = 2;
 $carServiceWeigt = 3;
 $constructionWeigt = 4;
 $gardiningWeigt = 5;
+$adminLevelPoint = 1;
+$pomenLevelPoint = 5;
+$userLevelPoint = 50;
 
 $dbo = new PDO('mysql:host=' . $database_host . '; dbname=' . $database_name, $database_user, $database_password);
 $dbo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  

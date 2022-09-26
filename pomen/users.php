@@ -54,9 +54,9 @@
 		<div class="card">
 			<div class="card-header">
 				<h4 class="card-title">Sensors List</h4>
-                                <form action="user_add.php" method="POST">
+                                <form action="sensor_add.php" method="POST">
                                         <input type="hidden" name="file_id" value="12">
-                                        <input type="submit" class="btn btn-amber" name="del_file" value="Add User">
+                                        <input type="submit" class="btn btn-amber" name="del_file" value="Add Sensor">
                                     </form>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>				
 			</div>

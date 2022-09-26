@@ -40,7 +40,7 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <?php include 'prints.php';    printSide('users') ?>
+    <?php include 'prints.php';    printSide('others') ?>
 
     <div class="app-content content">
       <div class="content-wrapper">
@@ -48,61 +48,66 @@
         <div class="content-header row">
         </div>
         <div class="content-body"><!-- Chart -->
-            <!-- Table head options start -->
+            <div class="row match-height">
+                <div class="col-12">
+                    <div class="">
+                        <div id="gradient-line-chart1" class="height-250 GradientlineShadow1"></div>
+                    </div>
+                </div>
+            </div>
+<!-- Chart -->
+<!-- eCommerce statistic -->
 <div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Sensors List</h4>
-                                <form action="user_add.php" method="POST">
-                                        <input type="hidden" name="file_id" value="12">
-                                        <input type="submit" class="btn btn-amber" name="del_file" value="Add User">
-                                    </form>
-				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>				
-			</div>
-			<div class="card-content collapse show">
-				<div class="table-responsive">
-					<table class="table">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">[User ID]</th>
-								<th scope="col">pic.</th>
-                                                                <th scope="col">Name</th>
-								<th scope="col">E-mail</th>
-                                                                <th scope="col">Type</th>
-								<th scope="col">Show</th>
-							</tr>
-						</thead>
-						<tbody>
-                                                    <?php $sensor_list = getAllUsers(); 
-                                                    if(!is_null($sensor_list)){
-                                                        while($sens = $sensor_list->fetch(PDO::FETCH_ASSOC)){ 
-                                                            $ut = getUserTypeByTypeId($sens['type']); ?>
-							<tr>
-								<th scope="row"><?php echo $sens['id']; ?></th>
-                                                                <td><span class="avatar">
-                                                                        <img src="../images/userImages/<?php echo $sens['image']; ?>" alt="avatar">
-                                                                    </span></td>
-								<td><?php echo $sens['name']; ?></td>
-                                                                <td><?php echo $sens['email']; ?></td>
-								<td><?php echo $ut['disply']; ?></td>
-                                                                        <td>
-                                                                            <form action="auser.php">
-                                                                                <input type="hidden" name="user_id" value="<?php echo $sens['id']; ?>">
-                                                                                <input type="submit" class="btn btn-cyan" name="showSensor" value="Disply">
-                                                                            </form>
-                                                                        </td>
-							</tr>
-                                                    <?php } } ?>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="col-xl-4 col-lg-6 col-md-12">
+        <div class="card pull-up ecom-card-1 bg-white">
+            <div class="card-content ecom-card2 height-180">
+                <h5 class="text-muted info position-absolute p-1">Temp</h5>                
+                <div class="progress-stats-container ct-golden-section height-75 position-relative pt-3">
+                    <div id="progress-stats-bar-chart1"></div>
+                    <div id="progress-stats-line-chart1" class="progress-stats-shadow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-12">
+        <div class="card pull-up ecom-card-1 bg-white">
+            <div class="card-content ecom-card2 height-180">
+                <h5 class="text-muted warning position-absolute p-1">Humidity</h5>
+                <div class="progress-stats-container ct-golden-section height-75 position-relative pt-3">
+                    <div id="progress-stats-bar-chart2"></div>
+                    <div id="progress-stats-line-chart2" class="progress-stats-shadow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- Table head options end -->
+<!--/ eCommerce statistic -->
 
+<!-- Statistics -->
+<div class="row match-height">
+    <div class="col-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title" id="heading-multiple-thumbnails">Mushroom IoT Farm System</h4>
+                    <a class="heading-elements-toggle">
+                        <i class="la la-ellipsis-v font-medium-3"></i>
+                    </a>
+                    <div class="heading-elements">
+                        <span class="avatar">
+                            <img src="../access_temp/theme-assets/mushroom.png" alt="avatar">
+                        </span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <h4 class="card-title">Contents</h4>
+                        <p class="card-text">.........................</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<!--/ Statistics -->
         </div>
       </div>
     </div>
@@ -127,10 +132,14 @@
     <!-- END PAGE LEVEL JS-->
   </body>
 </html><?php
-}}else {
+}else {echo isUserLoggedIn()."<br>";
+        echo '<form action="../index.php" method="get">
+          <input type="hidden" name="err" value="Please Login"/>
+          <input type="submit" name="login" value="Please Login1"/>
+      </form>'; } }else {echo isUserLoggedIn()."<br>";
      echo '<form action="../index.php" method="get">
           <input type="hidden" name="err" value="Please Login"/>
-          <input type="submit" name="login" value="Please Login"/>
+          <input type="submit" name="login" value="Please Login2"/>
       </form>';    
 } 
 ?>
