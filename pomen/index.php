@@ -40,64 +40,65 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <?php include 'prints.php';    printSide('users') ?>
+    <?php include 'prints.php';    printSide('index') ?>
 
     <div class="app-content content">
-      <div class="content-wrapper">
+        <div class="content-wrapper">
         <div class="content-wrapper-before"></div>
         <div class="content-header row">
         </div>
-        <div class="content-body"><!-- Chart -->
-            <!-- Table head options start -->
-<div class="row">
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Welcome <?php echo $pomen['name']; ?></h4>
-				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>				
-			</div>
-			<div class="card-content collapse show">
-				<div class="table-responsive">
-				<table class="table">
-					<tbody>                                                     
-                                                    <tr id="lg-1">
-                                                    <td class="tl-1"> <div align="left" id="tb-name">id:</div> </td>
-                                                    <td class="tl-4"><?php echo $pomen['id']; ?></td>
-                                                    </tr>
-                                                    <tr id="lg-1">
-                                                    <td class="tl-1"><div align="left" id="tb-name">Username:</div></td>
-                                                    <td class="tl-4"><?php echo $pomen['name']; ?></td>
-                                                    </tr>
-                                                    <tr id="lg-1">
-                                                    <td class="tl-1"><div align="left" id="tb-name">image:</div></td>
-                                                    <td class="tl-4"><?php echo "<img width='40' height='60' src=".'../images/userImages/'.$pomen['image']."  ;>";?>  </td>
-                                                    </tr>
-                                                    <tr id="lg-1">
-                                                    <td class="tl-1"><div align="left" id="tb-name">address:</div></td>
-                                                    <td class="tl-4"><?php echo $pomen['address']; ?></td>
-                                                    </tr>
-                                                        <tr id="lg-1">
-                                                    <td class="tl-1"><div align="left" id="tb-name">service type:</div></td>
-                                                    <td class="tl-4"><?php echo $service['service_type']; ?></td>
-                                                    </tr>
-                                                            <tr id="lg-1">
-                                                    <td class="tl-1"><div align="left" id="tb-name">service_name:</div></td>
-                                                    <td class="tl-4"><?php echo $service['service_name']; ?></td>
-                                                    </tr>
-                                                            <tr id="lg-1">
-                                                    <td class="tl-1"><div align="left" id="tb-name">description:</div></td>
-                                                    <td class="tl-4"><?php echo $service['service_description']; ?></td>
-                                                    </tr>
-                                        </tbody>                                
-                                </table>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Table head options end -->
+          <div class="content-body">
+            <div class="row">
+                    <div class="col-12">
+                            <div class="card">
+                                    <div class="card-header">
+                                            <h4 class="card-title">Welcome <?php echo $pomen['name']; ?></h4>
+                                            <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>				
+                                    </div>
+                                    <div class="card-content collapse show">
+                                            <div class="table-responsive">
+                                            <table class="table">
+                                                    <tbody>                                                     
+                                                                <tr id="lg-1">
+                                                                <td class="tl-1"> <div align="left" id="tb-name">id:</div> </td>
+                                                                <td class="tl-4"><?php echo $pomen['id']; ?></td>
+                                                                </tr>
+                                                                <tr id="lg-1">
+                                                                <td class="tl-1"><div align="left" id="tb-name">Username:</div></td>
+                                                                <td class="tl-4"><?php echo $pomen['name']; ?></td>
+                                                                </tr>
+                                                                <tr id="lg-1">
+                                                                <td class="tl-1"><div align="left" id="tb-name">image:</div></td>
+                                                                <td class="tl-4"><?php echo "<img width='40' height='60' src=".'../images/userImages/'.$pomen['image']."  ;>";?>  </td>
+                                                                </tr>
+                                                                <tr id="lg-1">
+                                                                <td class="tl-1"><div align="left" id="tb-name">address:</div></td>
+                                                                <td class="tl-4"><?php echo $pomen['address']; ?></td>
+                                                                </tr>
+                                                                    <tr id="lg-1">
+                                                                <td class="tl-1"><div align="left" id="tb-name">service type:</div></td>
+                                                                <td class="tl-4"><?php echo $service['service_type']; ?></td>
+                                                                </tr>
+                                                                        <tr id="lg-1">
+                                                                <td class="tl-1"><div align="left" id="tb-name">service_name:</div></td>
+                                                                <td class="tl-4"><?php echo $service['service_name']; ?></td>
+                                                                </tr>
+                                                                        <tr id="lg-1">
+                                                                <td class="tl-1"><div align="left" id="tb-name">description:</div></td>
+                                                                <td class="tl-4"><?php echo $service['service_description']; ?></td>
+                                                                </tr>
+                                                    </tbody>                                
+                                            </table>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+            <!-- Table head options end -->
 
+                    </div>
+          </div>
         </div>
-      </div>
+        
     </div>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
@@ -118,7 +119,8 @@
     <script src="../access_temp/theme-assets/js/scripts/pages/dashboard-lite.js" type="text/javascript"></script>
     <script src="../access_temp/theme-assets/js/scripts/charts/chartjs/line/line.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
-  </body>
+  
+</body>
 </html><?php
 }}else {
      echo '<form action="../index.php" method="get">
