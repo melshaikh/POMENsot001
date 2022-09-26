@@ -1,5 +1,5 @@
 <?php
-//$db = mysqli_connect("localhost","scceunim_mano","123456","scceunim_rms");
+$connection = mysqli_connect("localhost","root","","4178737_pomendb01");
 //$db = mysqli_connect("fdb29.awardspace.net","4178737_pomendb01	","unimapintek22","4178737_pomendb01");
 try {
 $database_name     = '4178737_pomendb01';
