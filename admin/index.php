@@ -129,7 +129,7 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="../access_temp/theme-assets/js/scripts/pages/dashboard-lite.js" type="text/javascript"></script>
     <script src="../access_temp/theme-assets/js/scripts/charts/chartjs/line/line.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL JS-->
+    <!-- END PAGE LEVEL JS-->    
   </body>
 </html><?php
 }else {echo isUserLoggedIn()."<br>";

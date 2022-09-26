@@ -76,9 +76,14 @@
             
             ?>
 <div class="row">
-    <?php if(isset($_POST['user_id']))$user = getUserByID($_POST['user_id']);
-        elseif(isset ($_GET['user_id']))$user = getUserByID($_GET['user_id']);
-        elseif(isset($_POST['user_id2']))$user = getUserByID($_POST['user_id2']); ?>
+    <?php        if (isset($_POST['user_id'])) {
+                $user = getUserByID($_POST['user_id']);
+            } elseif (isset($_GET['user_id'])) {
+                $user = getUserByID($_GET['user_id']);
+            } elseif (isset($_POST['user_id2'])) {
+                $user = getUserByID($_POST['user_id2']);
+            }
+            ?>
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
@@ -210,6 +215,20 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="../access_temp/theme-assets/js/scripts/pages/dashboard-lite.js" type="text/javascript"></script>
     <script src="../access_temp/theme-assets/js/scripts/charts/chartjs/line/line.js" type="text/javascript"></script>
+    <script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
     <!-- END PAGE LEVEL JS-->
   </body>
 </html><?php
