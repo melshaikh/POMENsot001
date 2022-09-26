@@ -22,6 +22,27 @@
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/pages/dashboard-ecommerce.css">
+    <style>
+            .holderi {
+                height: 300px;
+                width: 300px;
+                border: 2px solid black;
+            }
+            img#blah {
+                max-width: 300px;
+                max-height: 300px;
+                min-width: 300px;
+                min-height: 300px;
+            }
+            inputi[type="file"] {
+                margin-top: 5px;
+            }
+            .headingi {
+                font-family: Montserrat;
+                font-size: 45px;
+                color: green;
+            }
+    </style>   
    
   </head>
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
@@ -50,6 +71,13 @@
         <div class="content-body"><!-- Chart -->
             <!-- Table head options start -->
             <?php 
+            if (isset($_POST['user_id'])) {
+                $user = getUserByID($_POST['user_id']);
+            } elseif (isset($_GET['user_id'])) {
+                $user = getUserByID($_GET['user_id']);
+            } elseif (isset($_POST['user_id2'])) {
+                $user = getUserByID($_POST['user_id2']);
+            }
             if(isset($_POST['user_id2']))
             {
                 $sql = null;
@@ -70,20 +98,24 @@
                 echo $sql;
                 }else                    echo 'sql is null';
             }
-            
-            
-            
-            
+            if (isset($_POST['uploadimg'])) {
+                    include '../api/config.php';
+                    $filename = $_FILES["uploadfile"]["name"];
+                    $tempname = $_FILES["uploadfile"]["tmp_name"];
+                    $file_type=$_FILES['uploadfile']['type'];
+                    $file_ext=strtolower(end(explode('.',$_FILES['uploadfile']['name'])));
+                    $newFileName = 'p'.$user['id'].'.'.$file_ext;
+                    $folder = "../images/userImages/" .$newFileName;
+                    if (move_uploaded_file($tempname, $folder)) {
+                        $sqll = "UPDATE `user` SET `image` = '".$newFileName."' WHERE `user`.`id` = ".$user['id'].";";
+                        $stmt = $dbo->prepare($sqll);
+                        $stmt->execute();
+                    } else {
+                        echo "<h3>Failed</h3>";
+                    }
+                }        
             ?>
 <div class="row">
-    <?php        if (isset($_POST['user_id'])) {
-                $user = getUserByID($_POST['user_id']);
-            } elseif (isset($_GET['user_id'])) {
-                $user = getUserByID($_GET['user_id']);
-            } elseif (isset($_POST['user_id2'])) {
-                $user = getUserByID($_POST['user_id2']);
-            }
-            ?>
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
@@ -120,10 +152,16 @@
                             <img src="../images/userImages/<?php echo $user['image']; ?>" alt="avatar">
                     </span>
                 </td>
-                <td>
-                    <form action="auser.php" method="POST">
+                <td>                    
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        <div class="holderi">
+                            <img id="blah" src="../images/userImages/<?php echo $user['image']; ?>" alt="pic" />
+                        </div>
+                        <input type='file' name="uploadfile" onchange="readURL(this);" />
                         <input type="hidden" name="user_id2" value="<?php echo $user['id']; ?>">
-                        <input type="submit" class="btn btn-cyan" name="showSensor" value="Submit">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit" name="uploadimg">UPLOAD</button>
+                        </div>
                     </form>
                 </td>
             </tr>

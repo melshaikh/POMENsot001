@@ -46,28 +46,27 @@
   </head>
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
       <?php
-error_reporting(0);
- 
-$msg = "";
- 
-// If upload button is clicked ...
-if (isset($_POST['upload'])) {
-    include '../api/config.php';
-    $filename = $_FILES["uploadfile"]["name"];
-    $tempname = $_FILES["uploadfile"]["tmp_name"];
-    $file_type=$_FILES['uploadfile']['type'];
-    $file_ext=strtolower(end(explode('.',$_FILES['uploadfile']['name'])));
-    $newFileName = 'p'.$pomen['id'].'.'.$file_ext;
-    $folder = "../images/userImages/" .$newFileName;
-    if (move_uploaded_file($tempname, $folder)) {
-        $sqll = "UPDATE `user` SET `image` = '".$newFileName."' WHERE `user`.`id` = ".$pomen['id'].";";
-        $stmt = $dbo->prepare($sqll);
-        $stmt->execute();
-    } else {
-        echo "<h3>Failed</h3>";
-    }
-}
-?>
+        error_reporting(0); 
+        $msg = "";
+
+        // If upload button is clicked ...
+        if (isset($_POST['upload'])) {
+            include '../api/config.php';
+            $filename = $_FILES["uploadfile"]["name"];
+            $tempname = $_FILES["uploadfile"]["tmp_name"];
+            $file_type=$_FILES['uploadfile']['type'];
+            $file_ext=strtolower(end(explode('.',$_FILES['uploadfile']['name'])));
+            $newFileName = 'p'.$pomen['id'].'.'.$file_ext;
+            $folder = "../images/userImages/" .$newFileName;
+            if (move_uploaded_file($tempname, $folder)) {
+                $sqll = "UPDATE `user` SET `image` = '".$newFileName."' WHERE `user`.`id` = ".$pomen['id'].";";
+                $stmt = $dbo->prepare($sqll);
+                $stmt->execute();
+            } else {
+                echo "<h3>Failed</h3>";
+            }
+        }
+        ?>
     <!-- fixed-top-->
     <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
       <div class="navbar-wrapper">

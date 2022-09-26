@@ -160,3 +160,15 @@ function service_info()
           return $data;    
     }else return NULL;
 }
+function getAllUsersTypes()
+{
+   include 'config.php';
+    $sql = "SELECT * FROM `user_types` WHERE  1";
+    $query = $dbo->prepare($sql);
+    $query->execute();
+    $nr = $query->rowCount();
+    if($nr  > 0)
+    {       
+          return $query;    
+    }return NULL;  
+}
