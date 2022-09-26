@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="POMEN-SOT SYSTEM">
+    <meta name="description" content="IoT Farm Dashboard">
     <meta name="keywords" content="IoT Farm Dashboard">
     <meta name="author" content="Mohamed Elshaikh">
     <title>POMEN-SOT ADMIN SYSTEM</title>
@@ -40,7 +40,7 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <?php include 'prints.php';    printSide('users') ?>
+    <?php include 'prints.php';    printSide('services') ?>
 
     <div class="app-content content">
       <div class="content-wrapper">
@@ -53,62 +53,68 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">New User Form</h4>
-                                <?php if(isset($_GET['err'])){ ?> 
-                                <p><?php echo $_GET['err']; ?></p>
-                                <?php } ?>
-                                <form action="user_add.php" method="POST">
+                                <form action="service_add.php" method="POST">
                                         <input type="hidden" name="file_id" value="12">
-                                        <input type="submit" class="btn btn-amber" name="del_file" value="Add User">
+                                        <input type="submit" class="btn btn-amber" name="del_file" value="Add Service">
                                     </form>
-				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>				
+				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                                <?php if(isset($_POST['del_serv_id'])){ $del_serv = getServiceDetailByID($_POST['del_serv_id']); ?>
+                                <h1 class="text-danger">ARE YOU SURE WONTO DELETE (<?php echo $del_serv['name']; ?> SERVICE TYPE
+                                <form action="services.php" method="POST">
+                                        <input type="hidden" name="del_id" value="<?php echo $del_serv['id']; ?>">
+                                        <input type="submit" class="btn btn-danger" name="del_file_yes" value="YES">
+                                        <input type="submit" class="btn btn-green" name="del_file" value="No">
+                                    </form>
+                                </h1>
+                                <?php } 
+                                if(isset($_POST['del_file_yes']))
+                                       delServiceByID($_POST['del_id']);                                        
+                                        ?>
 			</div>
 			<div class="card-content collapse show">
 				<div class="table-responsive">
 					<table class="table">
-                                            <form action="add_user.php" method="POST">
-						<tbody>                                                
-                                                    <tr>
-                                                        <td>Name</td>
-                                                        <td><input type="text" name="name"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Email</td>
-                                                        <td><input type="email" name="email"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Password</td>
-                                                        <td><input type="password" name="pwd1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>re-Password</td>
-                                                        <td><input type="password" name="pwd2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Type</td>
-                                                        <td>
-                                                            <select name="type_id">
-                                                                <?php $types = getAllUsersTypes(); 
-                                                                if(!is_null($types)){
-                                                                    while($atype = $types->fetch(PDO::FETCH_ASSOC)){ ?>
-                                                                <option value="<?php echo $atype['id']?>"><?php echo $atype['disply']?></option>
-                                                                <?php } } ?>
-                                                            </select></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Address</td>
-                                                        <td><input type="text" name="address"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Location Link</td>
-                                                        <td><input type="text" name="location"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td><input type="submit" name="submitOK" value="AUBMIT"></td>
-                                                    </tr>
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">[ID]</th>
+								<th scope="col">Service Name.</th>
+                                                                <th scope="col">Pomen Type</th>
+								<th scope="col">Service Image</th>
+                                                                <th scope="col">details</th>
+                                                                <th scope="col">Edit</th>
+                                                                <th scope="col">Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+                                                    <?php $service_list = getAllServices(); 
+                                                    if(!is_null($service_list)){
+                                                        while($sens = $service_list->fetch(PDO::FETCH_ASSOC)){ 
+                                                            $st = getPomenTypeforServiceId($sens['pomen_type_id']); ?>
+							<tr>
+								<td><?php echo $sens['id']; ?></td>
+                                                                <td><?php echo $sens['name']; ?></td>
+                                                                <td><?php echo $st['name']; ?></td>
+                                                                <td><span class="avatar">
+                                                                        <img src="../images/userImages/<?php echo $sens['image']; ?>" alt="avatar">
+                                                                    </span>
+                                                                </td>
+								<td><?php echo $sens['details']; ?></td>
+                                                                <td>
+                                                                    <form action="aservice.php">
+                                                                        <input type="hidden" name="user_id" value="<?php echo $sens['id']; ?>">
+                                                                        <input type="submit" class="btn btn-cyan" name="showSensor" value="Disply">
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <form action="" method="POST">
+                                                                        <input type="hidden" name="del_serv_id" value="<?php echo $sens['id']; ?>">
+                                                                        <input type="submit" class="btn btn-danger" name="showSensor" value="DELETE">
+                                                                    </form>
+                                                                </td>
+                                                                
+							</tr>
+                                                    <?php } } ?>
 						</tbody>
-                                            </form>
 					</table>
 				</div>
 			</div>

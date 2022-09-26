@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="IoT Farm Dashboard">
+    <meta name="description" content="POMEN-SOT SYSTEM">
     <meta name="keywords" content="IoT Farm Dashboard">
     <meta name="author" content="Mohamed Elshaikh">
-    <title>IoT Farm Dashboard</title>
+    <title>POMEN-SOT ADMIN SYSTEM</title>
     <link rel="apple-touch-icon" href="../access_temp/theme-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../access_temp/theme-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="POMEN-SOT SYSTEM">
+    <meta name="description" content="IoT Farm Dashboard">
     <meta name="keywords" content="IoT Farm Dashboard">
     <meta name="author" content="Mohamed Elshaikh">
     <title>POMEN-SOT ADMIN SYSTEM</title>
@@ -22,10 +22,67 @@
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/pages/dashboard-ecommerce.css">
+    <style>
+            .holderi {
+                height: 300px;
+                width: 300px;
+                border: 2px solid black;
+            }
+            img#blah {
+                max-width: 300px;
+                max-height: 300px;
+                min-width: 300px;
+                min-height: 300px;
+            }
+            inputi[type="file"] {
+                margin-top: 5px;
+            }
+            .headingi {
+                font-family: Montserrat;
+                font-size: 45px;
+                color: green;
+            }
+    </style>
+    <script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
    
   </head>
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
-
+      <?php
+      if (isset($_POST['uploadimg'])) {
+                    $sql = "INSERT INTO `services_list` (`id`, `pomen_type_id`, `name`, `details`, `image`) VALUES "
+                                . "(NULL, '".$_POST['type_id']."', '".$_POST['name']."', '".$_POST['detail']."', 'pngegg.png');";
+                        $stmt = $dbo->prepare($sql);
+                        $stmt->execute();
+                        $id = $dbo->lastInsertId();
+                    include '../api/config.php';
+                    $filename = $_FILES["uploadfile"]["name"];
+                    $tempname = $_FILES["uploadfile"]["tmp_name"];
+                    $file_type=$_FILES['uploadfile']['type'];
+                    $file_ext = strtolower(pathinfo($_FILES['uploadfile']['name'], PATHINFO_EXTENSION));
+                    $newFileName = 'serv'.$id.'.'.$file_ext;
+                    $folder = "../images/userImages/" .$newFileName;
+                    if (move_uploaded_file($tempname, $folder)) {
+                        $sqll = "UPDATE `services_list` SET `image` = '".$newFileName."' WHERE `services_list`.`id` = ".$id.";";
+                        $stmt = $dbo->prepare($sqll);
+                        $stmt->execute();
+                    } else {
+                        echo "<h3>Failed</h3>";
+                    }
+                }        
+       ?>
     <!-- fixed-top-->
     <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
       <div class="navbar-wrapper">
@@ -40,7 +97,7 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <?php include 'prints.php';    printSide('users') ?>
+    <?php include 'prints.php';    printSide('services') ?>
 
     <div class="app-content content">
       <div class="content-wrapper">
@@ -53,59 +110,51 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">New User Form</h4>
+				<h4 class="card-title">New Service Form</h4>
                                 <?php if(isset($_GET['err'])){ ?> 
                                 <p><?php echo $_GET['err']; ?></p>
                                 <?php } ?>
-                                <form action="user_add.php" method="POST">
-                                        <input type="hidden" name="file_id" value="12">
-                                        <input type="submit" class="btn btn-amber" name="del_file" value="Add User">
-                                    </form>
 				<a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>				
 			</div>
 			<div class="card-content collapse show">
 				<div class="table-responsive">
 					<table class="table">
-                                            <form action="add_user.php" method="POST">
+                                            <form method="POST" action="" enctype="multipart/form-data">
 						<tbody>                                                
                                                     <tr>
                                                         <td>Name</td>
                                                         <td><input type="text" name="name"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Email</td>
-                                                        <td><input type="email" name="email"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Password</td>
-                                                        <td><input type="password" name="pwd1"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>re-Password</td>
-                                                        <td><input type="password" name="pwd2"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Type</td>
+                                                        <td>Pomen Type</td>
                                                         <td>
                                                             <select name="type_id">
-                                                                <?php $types = getAllUsersTypes(); 
+                                                                <?php $types = getAllPomenTypes(); 
                                                                 if(!is_null($types)){
                                                                     while($atype = $types->fetch(PDO::FETCH_ASSOC)){ ?>
-                                                                <option value="<?php echo $atype['id']?>"><?php echo $atype['disply']?></option>
+                                                                <option value="<?php echo $atype['id']?>"><?php echo $atype['display']?></option>
                                                                 <?php } } ?>
                                                             </select></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Address</td>
-                                                        <td><input type="text" name="address"></td>
+                                                        <td>Detail/Description</td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <textarea name="detail" class="form-control" rows="5" id="comment"></textarea>
+                                                            </div>
                                                     </tr>
                                                     <tr>
-                                                        <td>Location Link</td>
-                                                        <td><input type="text" name="location"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td></td>
-                                                        <td><input type="submit" name="submitOK" value="AUBMIT"></td>
+                                                        <td>image</td>
+                                                        <td>                                                        
+                                                            <div class="holderi">
+                                                                <img id="blah" src="../images/userImages/pngegg.png" alt="pic" />
+                                                            </div>
+                                                            <input type='file' name="uploadfile" onchange="readURL(this);" />
+                                                            <input type="hidden" name="user_id2" value="<?php echo $user['id']; ?>">
+                                                            <div class="form-group">
+                                                                <button class="btn btn-primary" type="submit" name="uploadimg">Save Service</button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
 						</tbody>
                                             </form>

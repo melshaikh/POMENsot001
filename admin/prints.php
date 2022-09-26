@@ -3,18 +3,18 @@ function printSide($page)
 {
     $index = '';
     $users = '';
-    $others = '';
+    $services = '';
     switch ($page)
     {
         case 'index':$index = 'class="active"'; break;
         case 'users':$users = 'class="active"'; break;
-        case 'others':$others = 'class="active"'; break;
+        case 'services':$services = 'class="active"'; break;
         default : $index = '';
     }
     echo '<div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
-            <li class="nav-item mr-auto"><a class="navbar-brand" href="index.php"><img class="brand-logo" src="./images/pomenlogo.jpg"/>
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="index.php"><img class="brand-logo" src="../images/pomenlogo.jpg"/>
               <h3 class="brand-text">IoT Farm</h3></a></li>
           <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
         </ul>
@@ -25,7 +25,7 @@ function printSide($page)
           </li>
           <li '.$users.' class=" nav-item"><a href="users.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Users</span></a>
           </li>
-          <li '.$others.' class=" nav-item"><a href="others.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Others</span></a>
+          <li '.$services.' class=" nav-item"><a href="services.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Services</span></a>
           </li>
           <li  class=" nav-item"><a href="logout.php"><i class="ft-book"></i><span class="menu-title" data-i18n="">logout</span></a>
           </li>

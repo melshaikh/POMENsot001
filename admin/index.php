@@ -8,7 +8,7 @@
     <meta name="description" content="IoT Farm Dashboard">
     <meta name="keywords" content="IoT Farm Dashboard">
     <meta name="author" content="Mohamed Elshaikh">
-    <title>IoT Farm Dashboard</title>
+    <title>POMEN-SOT ADMIN SYSTEM</title>
     <link rel="apple-touch-icon" href="../access_temp/theme-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../access_temp/theme-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
@@ -61,7 +61,7 @@
     <div class="col-xl-4 col-lg-6 col-md-12">
         <div class="card pull-up ecom-card-1 bg-white">
             <div class="card-content ecom-card2 height-180">
-                <h5 class="text-muted info position-absolute p-1">Temp</h5>                
+                <h5 class="text-muted info position-absolute p-1">Services</h5>                
                 <div class="progress-stats-container ct-golden-section height-75 position-relative pt-3">
                     <div id="progress-stats-bar-chart1"></div>
                     <div id="progress-stats-line-chart1" class="progress-stats-shadow"></div>
@@ -72,7 +72,7 @@
     <div class="col-xl-4 col-lg-12">
         <div class="card pull-up ecom-card-1 bg-white">
             <div class="card-content ecom-card2 height-180">
-                <h5 class="text-muted warning position-absolute p-1">Humidity</h5>
+                <h5 class="text-muted warning position-absolute p-1">Accounts</h5>
                 <div class="progress-stats-container ct-golden-section height-75 position-relative pt-3">
                     <div id="progress-stats-bar-chart2"></div>
                     <div id="progress-stats-line-chart2" class="progress-stats-shadow"></div>
@@ -88,7 +88,7 @@
     <div class="col-10">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title" id="heading-multiple-thumbnails">Mushroom IoT Farm System</h4>
+                    <h4 class="card-title" id="heading-multiple-thumbnails">POMEN-SOT Integrated System</h4>
                     <a class="heading-elements-toggle">
                         <i class="la la-ellipsis-v font-medium-3"></i>
                     </a>
@@ -100,8 +100,15 @@
                 </div>
                 <div class="card-content">
                     <div class="card-body">
-                        <h4 class="card-title">Contents</h4>
-                        <p class="card-text">.........................</p>
+                        <p class="card-text">We provide a platform of home maintenance services. 
+                            POMEN-SOT aims at helping people  in repairing and maintaining their 
+                            house holds. POMEN-SOT also provides a platform for repair men to 
+                            show their cases, and advertises their services to house owners. The 
+                            platform uses an integrated algorithm supported by AI and location 
+                            services to identify and suugest the suitable service man for home 
+                            owners.
+                            <br> POMEN-IOT system developers are welcoming any suggestion to improve 
+                            our system...</p>
                     </div>
                 </div>
             </div>

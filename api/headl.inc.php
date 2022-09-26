@@ -172,3 +172,61 @@ function getAllUsersTypes()
           return $query;    
     }return NULL;  
 }
+function getAllServices(){
+    include 'config.php';
+    $sql = "SELECT * FROM `services_list` WHERE  1";
+    $query = $dbo->prepare($sql);
+    $query->execute();
+    $nr = $query->rowCount();
+    if($nr  > 0)
+    {       
+          return $query;    
+    }return NULL; 
+}
+function getPomenTypeforServiceId($ptID)
+{
+    include 'config.php';
+    $sql = "SELECT * FROM `poment_type` WHERE `id` = '". $ptID."' LIMIT 1";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+    //$query = $db->query($sql);
+    //echo $sql;
+    $nr = $stmt->rowCount();
+    if($nr  > 0)
+    {
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+          return $data;    
+    }else return NULL;
+}
+function getAllPomenTypes()
+{
+   include 'config.php';
+    $sql = "SELECT * FROM `poment_type` WHERE  1";
+    $query = $dbo->prepare($sql);
+    $query->execute();
+    $nr = $query->rowCount();
+    if($nr  > 0)
+    {       
+          return $query;    
+    }return NULL;  
+}
+function getServiceDetailByID($del_serv_id)
+{
+    include 'config.php';
+    $sql = "SELECT * FROM `services_list` WHERE  `id` = '".$del_serv_id."'";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+    $nr = $stmt->rowCount();
+    if($nr  > 0)
+    {       
+          $data = $stmt->fetch(PDO::FETCH_ASSOC);
+          return $data; 
+    }return NULL; 
+}
+function delServiceByID($sid)
+{
+    include 'config.php';
+    $sql = "DELETE FROM `services_list` WHERE `services_list`.`id` = ".$sid;
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+}
