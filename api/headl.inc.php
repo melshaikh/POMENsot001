@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 5a46caef97f01be36ddbf71163372ab1ae66a395
 <?php session_start();
 include 'config.php';
 function isLecturerLoggedIn()
