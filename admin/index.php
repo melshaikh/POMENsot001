@@ -1,4 +1,4 @@
-<?php include '../api/headl.inc.php';if(isUserLoggedIn() > 0){if(getUser()['type'] = 1){$school_id = 1; $admino = getUser();?><!DOCTYPE html>
+<?php include '../api/headl.inc.php';if(isUserLoggedIn() > 0){if(getUser()['type'] = 1){$admino = getUser();?><!DOCTYPE html>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
   <head>

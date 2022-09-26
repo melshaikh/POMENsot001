@@ -12,6 +12,9 @@ $pipingWeigt = 2;
 $carServiceWeigt = 3;
 $constructionWeigt = 4;
 $gardiningWeigt = 5;
+$adminLevelPoint = 1;
+$pomenLevelPoint = 5;
+$userLevelPoint = 50;
 
 $dbo = new PDO('mysql:host=' . $database_host . '; dbname=' . $database_name, $database_user, $database_password);
 $dbo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
