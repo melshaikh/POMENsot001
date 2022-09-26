@@ -3,8 +3,8 @@
 //$db = mysqli_connect("fdb29.awardspace.net","4178737_pomendb01	","unimapintek22","4178737_pomendb01");
 try {
 $database_name     = '4178737_pomendb01';
-$database_user     = '4178737_pomendb01';
-$database_password = 'unimapintek22';
+$database_user     = 'root';
+$database_password = '';
 //$database_host     = 'fdb29.awardspace.net';
 $database_host     = 'localhost';
 $electricWeight = 1;
