@@ -31,7 +31,7 @@ if(isset($_POST['loginaaa']))
             }else if($f['level'] < 100) {header("location: pomen/index.php");}//pomen 10..99
             else if($f['level'] < 1000){header("Location: user/index.php");}//registered user 100..999
             else header("Location: index.php#contact?err='UN-known Level of access");
-        }else {header("Location: ../index.php?err='errore[9][".$sql."]'#contact");}    
+        }else {header("Location: index.php?err='errore[9][".$sql."]'#contact");}    
     } else header("Location: ../index.php?err='wrong User name or Password");
 }
 if(isset($_POST['signup']))

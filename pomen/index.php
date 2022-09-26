@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="IoT Farm Dashboard">
-    <meta name="keywords" content="IoT Farm Dashboard">
+    <meta name="description" content="Pome Dashboard">
+    <meta name="keywords" content="Pome Dashboard">
     <meta name="author" content="Mohamed Elshaikh">
-    <title>IoT Farm Dashboard</title>
+    <title>Pomen Dashboard</title>
     <link rel="apple-touch-icon" href="../access_temp/theme-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../access_temp/theme-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
@@ -22,10 +22,67 @@
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="../access_temp/theme-assets/css/pages/dashboard-ecommerce.css">
+    <style>
+            .holderi {
+                height: 300px;
+                width: 300px;
+                border: 2px solid black;
+            }
+            img#blah {
+                max-width: 300px;
+                max-height: 300px;
+                min-width: 300px;
+                min-height: 300px;
+            }
+            inputi[type="file"] {
+                margin-top: 5px;
+            }
+            .headingi {
+                font-family: Montserrat;
+                font-size: 45px;
+                color: green;
+            }
+    </style>
+    <script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
    
   </head>
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
-
+      <?php
+error_reporting(0);
+ 
+$msg = "";
+ 
+// If upload button is clicked ...
+if (isset($_POST['upload'])) {
+    include '../api/config.php';
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];
+    $file_type=$_FILES['uploadfile']['type'];
+    $file_ext=strtolower(end(explode('.',$_FILES['uploadfile']['name'])));
+    $newFileName = 'p'.$pomen['id'].'.'.$file_ext;
+    $folder = "../images/userImages/" .$newFileName;
+    if (move_uploaded_file($tempname, $folder)) {
+        $sqll = "UPDATE `user` SET `image` = '".$newFileName."' WHERE `user`.`id` = ".$pomen['id'].";";
+        $stmt = $dbo->prepare($sqll);
+        $stmt->execute();
+    } else {
+        echo "<h3>Failed</h3>";
+    }
+}
+?>
     <!-- fixed-top-->
     <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
       <div class="navbar-wrapper">
@@ -70,6 +127,17 @@
                                                                 <tr id="lg-1">
                                                                 <td class="tl-1"><div align="left" id="tb-name">image:</div></td>
                                                                 <td class="tl-4"><?php echo "<img width='40' height='60' src=".'../images/userImages/'.$pomen['image']."  ;>";?>  </td>
+                                                                <td>
+                                                                    <form method="POST" action="" enctype="multipart/form-data">
+                                                                        <div class="holderi">
+                                                                            <img id="blah" src="../images/userImages/<?php echo $pomen['image']; ?>" alt="pic" />
+                                                                        </div>
+                                                                        <input type='file' name="uploadfile" onchange="readURL(this);" />
+                                                                        <div class="form-group">
+                                                                            <button class="btn btn-primary" type="submit" name="upload">UPLOAD</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </td>
                                                                 </tr>
                                                                 <tr id="lg-1">
                                                                 <td class="tl-1"><div align="left" id="tb-name">address:</div></td>

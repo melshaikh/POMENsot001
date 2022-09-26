@@ -95,21 +95,19 @@
                 
             </div><!-- logo end -->
   
-            <div class="col-lg-9 header-right">
+            <div class="col-lg-9 header-right" >
                 <ul class="top-info-box">
                   <li>
                     <div class="info-box">
                       <div class="info-box-content">
-                          <p class="info-box-title">Call Us</p>
-                          <p class="info-box-subtitle">  &nbsp; # &nbsp;    </p>
+                          <p class="info-box-title"><a href="#login">Login</a></p>
                       </div>
                     </div>
                   </li>
                   <li>
                     <div class="info-box">
                       <div class="info-box-content">
-                          <p class="info-box-title">Email Us</p>
-                          <p class="info-box-subtitle">#</p>
+                          <p class="info-box-title"><a href="">Email Us</a></p>
                       </div>
                     </div>
                   </li>
@@ -649,7 +647,7 @@
     <div class="row">
 
 
-        <div class="col-lg-8">
+        <div class="col-lg-8" id="login">
           <div class="ts-newsletter row align-items-center">
               <div class="col-md-5 newsletter-introtext">
                 <h4 class="text-white mb-0">Newsletter Sign-up</h4>
