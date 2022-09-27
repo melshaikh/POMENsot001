@@ -81,7 +81,11 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <?php include 'prints.php';    printSide('index') ?>
+    <?php include 'prints.php';    printSide('index');
+    if(isset($_POST['change_pomen_type']))
+            setPomentTypetoUser($pomen['id'],$_POST['new_pomen_type']);
+    $pomen = getUser();
+            ?>
 
     <div class="app-content content">
         <div class="content-wrapper">
@@ -98,6 +102,8 @@
                                     </div>
                                     <div class="card-content collapse show">
                                             <div class="table-responsive">
+                                                <?php $pomen_type = getPomenTypeByUserID($pomen['id']);
+                                                    $service_list = getServicesByUserID($pomen['id']); ?>
                                             <table class="table">
                                                     <tbody>                                                     
                                                                 <tr id="lg-1">
@@ -124,16 +130,38 @@
                                                                 </td>
                                                                 </tr>
                                                                 <tr id="lg-1">
-                                                                <td class="tl-1"><div align="left" id="tb-name">address:</div></td>
-                                                                <td class="tl-4"><?php echo $pomen['address']; ?></td>
+                                                                    <td class="tl-1"><div align="left" id="tb-name">address:</div></td>
+                                                                    <td class="tl-4"><?php echo $pomen['address']; ?></td>
                                                                 </tr>
-                                                                    <tr id="lg-1">
-                                                                <td class="tl-1"><div align="left" id="tb-name">service type:</div></td>
-                                                                <td class="tl-4"><?php echo $service['service_type']; ?></td>
+                                                                <tr id="lg-1">
+                                                                <td class="tl-1"><div align="left" id="tb-name">Pomen type:</div></td>                                                                
+                                                                <td class="tl-4">
+                                                                    <?php echo $pomen_type['name']; ?>
+                                                                </td>
+                                                                <td class="tl-4">
+                                                                    <?php $p_types = getAllPomenTypes(); ?> 
+                                                                    <form method="post" action="index.php">
+                                                                        <select name="new_pomen_type">
+                                                                            <?php while ($apt=$p_types->fetch(PDO::FETCH_ASSOC)){
+                                                                                if($apt['id'] == $pomen['pomen']){ ?>
+                                                                            <option value="<?php echo $apt['id']; ?>" selected ><?php echo $apt['name']; ?></option>
+                                                                                <?php }else{ ?>
+                                                                            <option value="<?php echo $apt['id']; ?>"><?php echo $apt['name']; ?></option>
+                                                                            <?php } } ?>
+                                                                        </select>
+                                                                        <input type="submit" name="change_pomen_type" value="Change">
+                                                                    </form>
+                                                                </td>                                                    
                                                                 </tr>
                                                                         <tr id="lg-1">
-                                                                <td class="tl-1"><div align="left" id="tb-name">service_name:</div></td>
-                                                                <td class="tl-4"><?php echo $service['service_name']; ?></td>
+                                                                <td class="tl-1"><div align="left" id="tb-name">service list:</div></td>
+                                                                    <td class="tl-4"><?php if(!is_null($service_list))
+                                                                            while($serv = $service_list->fetch(PDO::FETCH_ASSOC))
+                                                                            {
+                                                                        echo '<br>'.$serv['name'];
+                                                                            }
+                                                                            ?>
+                                                                    </td>
                                                                 </tr>
                                                                         <tr id="lg-1">
                                                                 <td class="tl-1"><div align="left" id="tb-name">description:</div></td>

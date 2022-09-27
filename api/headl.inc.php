@@ -115,10 +115,13 @@ function getAllUsers()
 function logougt()
 {
     $crnt = getUser();
+    if(!is_null($crnt))
+    {
     include 'config.php';
     $sql = "DELETE FROM `active_users` WHERE `active_users`.`user` = ".$crnt['id'];
     $stmt2 = $dbo->prepare($sql);
     $stmt2->execute();
+    }
 }
 function isUserLoggedIn()
 {
@@ -229,4 +232,55 @@ function delServiceByID($sid)
     $sql = "DELETE FROM `services_list` WHERE `services_list`.`id` = ".$sid;
     $stmt = $dbo->prepare($sql);
     $stmt->execute();
+}
+function delServiceFromPomenList($serv_id,$pomen_id)
+{
+    include 'config.php';
+    $sql = "DELETE FROM `pomen_to_service` WHERE `service_id` = '".$serv_id."' AND `pomen_id` = '".$pomen_id."'";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+}
+function getServicesByUserID($userid)
+{
+    include 'config.php';
+    $sql = "SELECT s.* FROM `services_list` AS s INNER JOIN `pomen_to_service` AS p WHERE  p.`pomen_id` = '".$userid."' AND p.`service_id` = s.`id`";
+    $query = $dbo->prepare($sql);
+    $query->execute();
+    $nr = $query->rowCount();
+    if($nr  > 0)
+    {       
+          return $query;    
+    }return NULL;  
+}
+function getServiceListByPomenType($ptid)
+{
+    include 'config.php';
+    $sql = "SELECT * FROM `services_list` WHERE  `pomen_type_id` = '".$ptid."'";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+    $nr = $stmt->rowCount();
+    if($nr  > 0)
+    {     
+          return $stmt; 
+    }return NULL;
+}
+function getPomenTypeByUserID($pomenID)
+{
+  include 'config.php';
+    $sql = "SELECT pt.* FROM poment_type AS pt INNER JOIN user AS u WHERE  u.id = '".$pomenID."' AND `pt`.id = u.pomen";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+    $nr = $stmt->rowCount();
+    if($nr  > 0)
+    {       
+          $data = $stmt->fetch(PDO::FETCH_ASSOC);
+          return $data; 
+    }return NULL;   
+}
+function setPomentTypetoUser($userID,$pomenTypeID)
+{
+  include 'config.php';
+    $sql = "UPDATE `user` SET `pomen` = '".$pomenTypeID."' WHERE `id`= '".$userID."'";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();  
 }

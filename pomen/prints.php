@@ -7,7 +7,7 @@ function printSide($page)
     switch ($page)
     {
         case 'index':$index = 'class="active"'; break;
-        case 'users':$users = 'class="active"'; break;
+        case 'services':$users = 'class="active"'; break;
         case 'others':$others = 'class="active"'; break;
         default : $index = '';
     }
@@ -23,7 +23,7 @@ function printSide($page)
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
           <li '.$index.'><a href="index.php"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
-          <li '.$users.' class=" nav-item"><a href="users.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Users</span></a>
+          <li '.$users.' class=" nav-item"><a href="services.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Services</span></a>
           </li>
           <li '.$others.' class=" nav-item"><a href="others.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Others</span></a>
           </li>
