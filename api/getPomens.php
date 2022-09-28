@@ -2,8 +2,8 @@
 if(isset($_GET['app_id']))
 {
     include 'config.php';
-    $sql = "SELECT a.`id`,a.`name`,a.`email`,a.`image`,a.`location`,a.`address`  FROM `user` AS a INNER JOIN `poment_type` AS b "
-            . "WHERE a.pomen = b.id AND b.weight = ".$_GET['weight']." ;";
+    $sql = "SELECT `id`,`name`,`email`,`image`,`location`,`address`  FROM `user` "
+            . "WHERE `pomen` = ".$_GET['ptype']." ;";
      $stmt = $dbo->prepare($sql);
             $stmt->execute();           
             $data = [];

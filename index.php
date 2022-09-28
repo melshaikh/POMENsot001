@@ -117,7 +117,7 @@
                     </div>
                   </li>
                   <li class="header-get-a-quote">
-                    <a class="btn btn-primary" href="#">Get Started</a>
+                    <a class="btn btn-primary" href="api/app-debug.aab">Get POMEN SOT APP</a>
                   </li>
                 </ul><!-- Ul end -->
             </div><!-- header right end -->
