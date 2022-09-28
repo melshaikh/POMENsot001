@@ -48,18 +48,18 @@ include 'api/config.php';
         $Password = $_POST['Password'];
         $confirm_Password = $_POST['confirm_password'];
           
-       $name=mysqli_real_escape_string($connection,$_POST['full_name']);
-        $email=mysqli_real_escape_string($connection,$email);
-        $type=mysqli_real_escape_string($connection,$type);
-        $Password=mysqli_real_escape_string($connection,$confirm_Password);
-        $confirm_Password=mysqli_real_escape_string($connection,$type);
+       $name=mysqli_real_escape_string($dbo,$_POST['full_name']);
+        $email=mysqli_real_escape_string($dbo,$email);
+        $type=mysqli_real_escape_string($dbo,$type);
+        $Password=mysqli_real_escape_string($dbo,$confirm_Password);
+        $confirm_Password=mysqli_real_escape_string($dbo,$type);
 
 if ($_POST["Password"] === $_POST["confirm_password"]) {
   
     $sql_user = "SELECT * FROM user WHERE name='$name'";
   	$sql_email = "SELECT * FROM user WHERE email='$email'";
-  	$user_query = mysqli_query($connection, $sql_user);
-  	$email_query = mysqli_query($connection, $sql_email);
+  	$user_query = mysqli_query($dbo, $sql_user);
+  	$email_query = mysqli_query($dbo, $sql_email);
     $Password= hash("sha512",$Password);
     switch($type)
     {
