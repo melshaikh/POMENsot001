@@ -284,3 +284,4 @@ function setPomentTypetoUser($userID,$pomenTypeID)
     $stmt = $dbo->prepare($sql);
     $stmt->execute();  
 }
+
