@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php include 'api/headl.inc.php' ?><!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -394,7 +394,10 @@
     </div><!-- Row end -->
   </div><!-- Container end -->
 </section><!-- Feature are end -->
-
+<?php 
+$total_projects = getNoOfServiceOrders();
+$total_services = getNoOfServiceList();
+$total_users = getNoOfUser(); ?>
 <section id="facts" class="facts-area dark-bg">
   <div class="container">
     <div class="facts-wrapper">
@@ -404,7 +407,7 @@
                 <img loading="lazy" src="images/icon-image/fact1.png" alt="facts-img">
               </div>
               <div class="ts-facts-content">
-                <h2 class="ts-facts-num"><span class="counterUp" data-count="0">0</span></h2>
+                <h2 class="ts-facts-num"><span data-count="0"><?php echo $total_projects; ?></span></h2>
                 <h3 class="ts-facts-title">#Total Projects</h3>
               </div>
           </div><!-- Col end -->
@@ -414,7 +417,7 @@
                 <img loading="lazy" src="images/icon-image/fact2.png" alt="facts-img">
               </div>
               <div class="ts-facts-content">
-                <h2 class="ts-facts-num"><span class="counterUp" data-count="0">0</span></h2>
+                <h2 class="ts-facts-num"><span data-count="0"><?php echo $total_users; ?></span></h2>
                 <h3 class="ts-facts-title">#Staff Members</h3>
               </div>
           </div><!-- Col end -->
@@ -424,8 +427,8 @@
                 <img loading="lazy" src="images/icon-image/fact3.png" alt="facts-img">
               </div>
               <div class="ts-facts-content">
-                <h2 class="ts-facts-num"><span class="counterUp" data-count="0">0</span></h2>
-                <h3 class="ts-facts-title">#Hours of Work</h3>
+                <h2 class="ts-facts-num"><span data-count="0"><?php echo $total_services; ?></span></h2>
+                <h3 class="ts-facts-title">#Services our team can provide</h3>
               </div>
           </div><!-- Col end -->
 
