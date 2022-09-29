@@ -286,4 +286,30 @@ function setPomentTypetoUser($userID,$pomenTypeID)
     $stmt = $dbo->prepare($sql);
     $stmt->execute();  
 }
-
+function getNoOfServiceList()
+{
+    include 'config.php';
+    $sql = "SELECT * FROM `services_list` WHERE  1";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+    $nr = $stmt->rowCount();
+    return $nr;
+}
+function getNoOfUser()
+{
+    include 'config.php';
+    $sql = "SELECT * FROM `user` WHERE  1";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+    $nr = $stmt->rowCount();
+    return $nr;
+}
+function getNoOfServiceOrders()
+{
+    include 'config.php';
+    $sql = "SELECT * FROM `user` WHERE  1";
+    $stmt = $dbo->prepare($sql);
+    $stmt->execute();
+    $nr = $stmt->rowCount();
+    return $nr;
+}
