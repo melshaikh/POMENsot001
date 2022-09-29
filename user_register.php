@@ -44,7 +44,6 @@ include 'api/config.php';
         {    
         $name = $_POST['full_name'];
         $email = $_POST['email_address'];
-        $type = $_POST['type'];
         $Password = $_POST['Password'];
         $confirm_Password = $_POST['confirm_password'];
           
@@ -61,19 +60,9 @@ if ($_POST["Password"] === $_POST["confirm_password"]) {
   	$user_query = mysqli_query($dbo, $sql_user);
   	$email_query = mysqli_query($dbo, $sql_email);
     $Password= hash("sha512",$Password);
-    switch($type)
-    {
-        case "pomen":
-            $level=50; 
-            $type=1;
-        break;
-        case "user":
-            $level=500;
-            $type=1;
-        break;
-       
-    }
-
+   
+            $level="500"; 
+            $type="3";
     
   	if (mysqli_num_rows($user_query) > 0) {
         echo '<script>alert("name already taken")</script>';
@@ -81,7 +70,7 @@ if ($_POST["Password"] === $_POST["confirm_password"]) {
   	
 echo '<script>alert("Email already taken")</script>'; 	
   	}else{
-    $sql = "INSERT INTO user (name,email,password,level,type) VALUES ('$name','$email','$Password','$level',$type)";
+    $sql = "INSERT INTO user (name,email,password,level,type) VALUES ('$name','$email','$Password','$level','$type')";
     $sessionID = session_id();
         
             $hash = hash("sha512",$sessionID.$_SERVER['HTTP_USER_AGENT']);
@@ -89,7 +78,7 @@ echo '<script>alert("Email already taken")</script>';
             $stmt->execute();
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            $sql="select id from user where email='$email'";
+            $sql="select * from user where email='$email'";
             $stmt = $dbo->prepare($sql);
             $stmt->execute();
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -132,17 +121,6 @@ else {
                                         <input required type="email" id="email_address" class="form-control" name="email_address">
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="type" class="col-md-4 col-form-label text-md-right">type</label>
-                                    <div class="col-md-6">
-                                        <select class="form-control" name="type">
-                                        <option value = "user" >user</option>
-                                        <option value = "pomen" >pomen</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-6">

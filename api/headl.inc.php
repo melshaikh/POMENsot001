@@ -67,6 +67,8 @@ function getUser()
     $sql = "SELECT * FROM `user` WHERE `id` = '". isUserLoggedIn()."' LIMIT 1";
     $stmt = $dbo->prepare($sql);
     $stmt->execute();
+    //$query = $db->query($sql);
+    //echo $sql;
     $nr = $stmt->rowCount();
     if($nr  > 0)
     {
@@ -284,3 +286,4 @@ function setPomentTypetoUser($userID,$pomenTypeID)
     $stmt = $dbo->prepare($sql);
     $stmt->execute();  
 }
+
