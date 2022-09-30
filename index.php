@@ -158,7 +158,9 @@
                               </ul>
                           </li>
             <li class="nav-item"><a class="nav-link" href="#">profile</a></li>
-            <li class="nav-item"><a class="nav-link" href="register_option.php">register</a>
+            <li class="nav-item"><a class="nav-link" href="pomen_register.php">REGISTER AS POMEN </a>
+            <li class="nav-item"><a class="nav-link" href="user_register.php">REGISTER AS USER </a>
+            <li class="nav-item"><a class="nav-link" href="lo_dis.php">LOGIN</a>
                     
               
                     
@@ -222,7 +224,7 @@
     </div>
   </div>
 
-  <div class="banner-carousel-item" style="background-image:url(images/slider-main/2.png)">
+  <div class="banner-carousel-item" style="background-image:url(images/slider-main/3.jpg)">
     <div class="slider-content text-left">
         <div class="container h-100">
           <div class="row align-items-center h-100">
@@ -239,23 +241,7 @@
     </div>
   </div>
 
-  <div class="banner-carousel-item" style="background-image:url(images/slider-main/3.png)">
-    <div class="slider-content text-right">
-        <div class="container h-100">
-          <div class="row align-items-center h-100">
-              <div class="col-md-12">
-                <h2 class="slide-title" data-animation-in="slideInDown">Meet Our Engineers</h2>
-                <h3 class="slide-sub-title" data-animation-in="fadeIn">We believe sustainability</h3>
-                <p class="slider-description lead" data-animation-in="slideInRight">We will deal with your failure that determines how you achieve success.</p>
-                <div data-animation-in="slideInLeft">
-                    <a href="contact.html" class="slider btn btn-primary" aria-label="contact-with-us">Get Free Quote</a>
-                    <a href="about.html" class="slider btn btn-primary border" aria-label="learn-more-about-us">Learn more</a>
-                </div>
-              </div>
-          </div>
-        </div>
-    </div>
-  </div>
+ 
 </div>
 
 <section class="call-to-action-box no-padding">
@@ -635,48 +621,6 @@ $total_users = getNoOfUser(); ?>
   <!--/ Container end -->
 </section><!-- Content end -->
 
-<section class="subscribe no-padding">
-  <div class="container">
-    <div class="row">
-
-
-        <div class="col-lg-8" id="login">
-          <div class="ts-newsletter row align-items-center">
-              <div class="col-md-5 newsletter-introtext">
-                <h4 class="text-white mb-0">Newsletter Sign-up</h4>
-                <?php if(isset($_GET['err'])){ ?><p><?php echo $_GET['err']; ?></p><?php } ?>
-              
-              </div>
-
-              <div class="col-md-7 newsletter-form">
-                    <form method="POST" action="lo_dis.php" >
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control rounded-0" placeholder="Email" required />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="pwd" class="form-control rounded-0" placeholder="*****" required />
-                            <input type="hidden" name="loginaaa" value="aaa"/>
-                        </div>
-<!--                        <div class="form-group">
-                            <select class="form-control" id="contact-select" name="level">
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </select>
-                        </div>-->
-                        <div class="form-group tm-text-right">
-                            <input type="submit" value="Login" class="btn btn-info" name="loginaaa"/>
-                        </div>
-                    </form>
-             
-              </div>
-          </div><!-- Newsletter end -->
-        </div><!-- Col end -->
-
-    </div><!-- Content row end -->
-  </div>
-  <!--/ Container end -->
-</section>
-<!--/ subscribe end -->
 
 <section id="news" class="news">
   <div class="container">

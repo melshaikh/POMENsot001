@@ -1,66 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>PHP Find Nearest Location using Latitude and Longitude Example</title>
-</head>
-<body>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 mx-auto">
-                    <div class="page-header clearfix">
-                        <h2 class="pull-left">Location List</h2>
-                    </div>
-                    <?php
- 
-                       require_once "db.php";
- 
-                        if (isset($_POST['submit'])) {
- 
-                            $lat = $_POST['lat'];
-                            $long = $_POST['long'];
- 
-                            $sql = "SELECT * , (3956 * 2 * ASIN(SQRT( POWER(SIN(( $lat - LatOnTable) *  pi()/180 / 2), 2) +COS( $lat * pi()/180) * COS(LatOnTable * pi()/180) * POWER(SIN(( $long - LongOnTable) * pi()/180 / 2), 2) ))) as distance  
-                                from locations  
-                                having  distance <= 10 
-                                order by distance";
- 
-                            $result = mysqli_query($conn, $sql);
- 
-                        }
-                    ?>
- 
- 
-                    <?php
-                    if (mysqli_num_rows($result) > 0) {
-                    ?>
-                      <table class='table table-bordered table-striped'>
-                       
-                      <tr>
-                        <td>Address</td>
-                      </tr>
-                    <?php
-                    $i=0;
-                    while($row = mysqli_fetch_array($result)) {
-                    ?>
-                    <tr>
-                        <td><?php echo $row["address"]; ?></td>
-                    </tr>
-                    <?php
-                    $i++;
-                    }
-                    ?>
-                    </table>
-                     <?php
-                    }
-                    else{
-                        echo "No result found";
-                    }
-                    ?>
- 
-                </div>
-            </div>     
-        </div>
- 
-</body>
-</html>
+<?php 
+$latitude='3.08905';
+$longitude='101.6017242';
+$geolocation = $latitude.','.$longitude;
+$request = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.$geolocation.'&sensor=false'; 
+$file_contents = file_get_contents($request);
+$json_decode = json_decode($file_contents);
+if(isset($json_decode->results[0])) {
+    $response = array();
+    foreach($json_decode->results[0]->address_components as $addressComponet) {
+        if(in_array('political', $addressComponet->types)) {
+                $response[] = $addressComponet->long_name; 
+        }
+    }
+
+    if(isset($response[0])){ $first  =  $response[0];  } else { $first  = 'null'; }
+    if(isset($response[1])){ $second =  $response[1];  } else { $second = 'null'; } 
+    if(isset($response[2])){ $third  =  $response[2];  } else { $third  = 'null'; }
+    if(isset($response[3])){ $fourth =  $response[3];  } else { $fourth = 'null'; }
+    if(isset($response[4])){ $fifth  =  $response[4];  } else { $fifth  = 'null'; }
+
+    
+        echo "<br/>Address:: ".$first;
+        echo "<br/>City:: ".$second;
+        echo "<br/>State:: ".$fourth;
+        echo "<br/>Country:: ".$fifth;
+   
+  }
+?>
