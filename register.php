@@ -7,7 +7,11 @@ include 'api/config.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <link rel="icon" href="Favicon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -40,24 +44,36 @@ include 'api/config.php';
         {    
         $name = $_POST['full_name'];
         $email = $_POST['email_address'];
+        $type = $_POST['type'];
         $Password = $_POST['Password'];
         $confirm_Password = $_POST['confirm_password'];
           
-        $name=mysqli_real_escape_string($connection,$name);
-        $email=mysqli_real_escape_string($connection,$email);
-        $Password=mysqli_real_escape_string($connection,$Password);
-        $confirm_Password=mysqli_real_escape_string($connection,$confirm_Password);
+       $name=mysqli_real_escape_string($dbo,$_POST['full_name']);
+        $email=mysqli_real_escape_string($dbo,$email);
+        $type=mysqli_real_escape_string($dbo,$type);
+        $Password=mysqli_real_escape_string($dbo,$confirm_Password);
+        $confirm_Password=mysqli_real_escape_string($dbo,$type);
 
 if ($_POST["Password"] === $_POST["confirm_password"]) {
   
     $sql_user = "SELECT * FROM user WHERE name='$name'";
   	$sql_email = "SELECT * FROM user WHERE email='$email'";
-  	$user_query = mysqli_query($connection, $sql_user);
-  	$email_query = mysqli_query($connection, $sql_email);
+  	$user_query = mysqli_query($dbo, $sql_user);
+  	$email_query = mysqli_query($dbo, $sql_email);
     $Password= hash("sha512",$Password);
-   
-            $level="500"; 
-            $type="3";
+    switch($type)
+    {
+        case "pomen":
+            $level=50; 
+            $type=1;
+        break;
+        case "user":
+            $level=500;
+            $type=1;
+        break;
+       
+    }
+
     
   	if (mysqli_num_rows($user_query) > 0) {
         echo '<script>alert("name already taken")</script>';
@@ -65,7 +81,7 @@ if ($_POST["Password"] === $_POST["confirm_password"]) {
   	
 echo '<script>alert("Email already taken")</script>'; 	
   	}else{
-    $sql = "INSERT INTO user (name,email,password,level,type) VALUES ('$name','$email','$Password','$level','$type')";
+    $sql = "INSERT INTO user (name,email,password,level,type) VALUES ('$name','$email','$Password','$level',$type)";
     $sessionID = session_id();
         
             $hash = hash("sha512",$sessionID.$_SERVER['HTTP_USER_AGENT']);
@@ -73,7 +89,7 @@ echo '<script>alert("Email already taken")</script>';
             $stmt->execute();
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            $sql="select * from user where email='$email'";
+            $sql="select id from user where email='$email'";
             $stmt = $dbo->prepare($sql);
             $stmt->execute();
             $userData = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -116,6 +132,17 @@ else {
                                         <input required type="email" id="email_address" class="form-control" name="email_address">
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="type" class="col-md-4 col-form-label text-md-right">type</label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="type">
+                                        <option value = "user" >user</option>
+                                        <option value = "pomen" >pomen</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-6">

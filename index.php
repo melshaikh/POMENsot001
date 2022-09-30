@@ -158,7 +158,7 @@
                               </ul>
                           </li>
             <li class="nav-item"><a class="nav-link" href="#">profile</a></li>
-            <li class="nav-item"><a class="nav-link" href="register.php">register</a>
+            <li class="nav-item"><a class="nav-link" href="register_option.php">register</a>
                     
               
                     
