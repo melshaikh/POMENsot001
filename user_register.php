@@ -83,7 +83,7 @@ include 'api/config.php';
                     header("location: pomen/index.php");
                 } //pomen 10..99
                 else if ($level < 1000 && $level > 100) {
-                    header("Location: user/index.php");
+                   header("location: user/index.php");
                 } //registered user 
             }
         } else {
@@ -135,7 +135,7 @@ include 'api/config.php';
                                         Register
                                     </button>
                                 </div>
-                        </div>
+                        
                         </form>
                     </div>
                 </div>
