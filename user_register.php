@@ -90,6 +90,17 @@ include 'api/config.php';
 //            echo '<script>alert("password does not match")</script>';
 //        }
 //    }
+            if(isset($_GET['alert']))
+            {
+
+            if ($_GET['alert'] == 1)
+            {
+            echo '<script>alert("password does not match")</script>';
+            }
+            else if ($_GET['alert'] == 2){
+            echo '<script>alert("name or gmail already taken")</script>';
+            }
+            }
     ?>
 
 
