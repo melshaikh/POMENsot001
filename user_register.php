@@ -38,58 +38,58 @@ include 'api/config.php';
         </div>
     </nav>
     <?php
-    if (isset($_POST['submit'])) {
-        $name = $_POST['full_name'];
-        $email = $_POST['email_address'];
-        $Password = $_POST['Password'];
-        $confirm_Password = $_POST['confirm_password'];
+   // if (isset($_POST['submit'])) {
+//        $name = $_POST['full_name'];
+//        $email = $_POST['email_address'];
+//        $Password = $_POST['Password'];
+//        $confirm_Password = $_POST['confirm_password'];
 
         // $name=mysqli_real_escape_string($connection,$name);
         // $email=mysqli_real_escape_string($connection,$email);
         // $Password=mysqli_real_escape_string($connection,$Password);
         // $confirm_Password=mysqli_real_escape_string($connection,$confirm_Password);
 
-        if ($_POST["Password"] === $_POST["confirm_password"]) 
-        {
-            $name_user = "SELECT * FROM user WHERE name='$name' or email ='$email'";
-            $stmt = $dbo->prepare($name_user);
-            $stmt->execute();
-            $name_gmail = $stmt->rowCount();
-            $Password = hash("sha512", $Password);
-
-            if ( $name_gmail > 0) 
-            {
-                echo '<script>alert("name or gmail already taken")</script>';
-            } else 
-            {   
-                $level = "500";
-                $type = "3";
-                $sql = "INSERT INTO user (name,email,password,level,type) VALUES ('$name','$email','$Password','$level','$type')";
-                $sessionID = session_id();
-                $hash = hash("sha512", $sessionID . $_SERVER['HTTP_USER_AGENT']);
-                $stmt = $dbo->prepare($sql);
-                $stmt->execute();
-                $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-                $sql = "select * from user where email='$email'";
-                $stmt = $dbo->prepare($sql);
-                $stmt->execute();
-                $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-                $expires = time() + (60 * 60);
-                $new_sql = "INSERT INTO `active_users`(`user`, `session_id`, `hash`, `expires`, `level`) VALUES ('" . $userData['id'] . "','" . $sessionID . "','" . $hash . "','" . $expires . "','" . $userData['level'] . "')";
-                $dbo->query($new_sql);
-                if ($level < 10) {
-                    header("Location: admin/index.php"); // system admins 0..9
-                } else if ($level < 100 && $level > 10) {
-                    header("location: pomen/index.php");
-                } //pomen 10..99
-                else if ($level < 1000 && $level > 100) {
-                   header("location: user/index.php");
-                } //registered user 
-            }
-        } else {
-            echo '<script>alert("password does not match")</script>';
-        }
-    }
+//        if ($_POST["Password"] === $_POST["confirm_password"]) 
+//        {
+//            $name_user = "SELECT * FROM user WHERE name='$name' or email ='$email'";
+//            $stmt = $dbo->prepare($name_user);
+//            $stmt->execute();
+//            $name_gmail = $stmt->rowCount();
+//            $Password = hash("sha512", $Password);
+//
+//            if ( $name_gmail > 0) 
+//            {
+//                echo '<script>alert("name or gmail already taken")</script>';
+//            } else 
+//            {   
+//                $level = "500";
+//                $type = "3";
+//                $sql = "INSERT INTO user (name,email,password,level,type) VALUES ('$name','$email','$Password','$level','$type')";
+//                $sessionID = session_id();
+//                $hash = hash("sha512", $sessionID . $_SERVER['HTTP_USER_AGENT']);
+//                $stmt = $dbo->prepare($sql);
+//                $stmt->execute();
+//                $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+//                $sql = "select * from user where email='$email'";
+//                $stmt = $dbo->prepare($sql);
+//                $stmt->execute();
+//                $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+//                $expires = time() + (60 * 60);
+//                $new_sql = "INSERT INTO `active_users`(`user`, `session_id`, `hash`, `expires`, `level`) VALUES ('" . $userData['id'] . "','" . $sessionID . "','" . $hash . "','" . $expires . "','" . $userData['level'] . "')";
+//                $dbo->query($new_sql);
+//                if ($level < 10) {
+//                    header("Location: admin/index.php"); // system admins 0..9
+//                } else if ($level < 100 && $level > 10) {
+//                    header("location: pomen/index.php");
+//                } //pomen 10..99
+//                else if ($level < 1000 && $level > 100) {
+//                   header("location: user/index.php");
+//                } //registered user 
+//            }
+//        } else {
+//            echo '<script>alert("password does not match")</script>';
+//        }
+//    }
     ?>
 
 
@@ -100,7 +100,7 @@ include 'api/config.php';
                     <div class="card">
                         <div class="card-header">Register</div>
                         <div class="card-body">
-                            <form name="my-form" onsubmit="return validform()" action="" method="post">
+                            <form name="my-form" onsubmit="return validform()" action="regisrer_redirect.php?level=500" method="post">
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name</label>
                                     <div class="col-md-6">
