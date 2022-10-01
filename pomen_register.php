@@ -44,60 +44,33 @@ include 'api/config.php';
         $Password = $_POST['Password'];
         $confirm_Password = $_POST['confirm_password'];
           
-        $name=mysqli_real_escape_string($connection,$name);
-        $email=mysqli_real_escape_string($connection,$email);
-        $pomen_type=mysqli_real_escape_string($connection,$pomen_type);
-        $Password=mysqli_real_escape_string($connection,$Password);
-        $confirm_Password=mysqli_real_escape_string($connection,$confirm_Password);
+        // $name=mysqli_real_escape_string($connection,$name);
+        // $email=mysqli_real_escape_string($connection,$email);
+        // $pomen_type=mysqli_real_escape_string($connection,$pomen_type);
+        // $Password=mysqli_real_escape_string($connection,$Password);
+        // $confirm_Password=mysqli_real_escape_string($connection,$confirm_Password);
+        
 
 if ($_POST["Password"] === $_POST["confirm_password"]) {
   
-    $sql_user = "SELECT * FROM user WHERE name='$name'";
-  	$sql_email = "SELECT * FROM user WHERE email='$email'";
-  	$user_query = mysqli_query($connection, $sql_user);
-  	$email_query = mysqli_query($connection, $sql_email);
-    $Password= hash("sha512",$Password);
+    $sql_user = "SELECT * FROM user WHERE name='$name' or email ='$email'";
+  	//$sql_email = "SELECT * FROM user WHERE email='$email'";
+  	//$user_query = mysqli_query($connection, $sql_user);
+  	//$email_query = mysqli_query($connection, $sql_email);
+    //$Password= hash("sha512",$Password);
+    $stmt = $dbo->prepare($sql_user);
+    $stmt->execute();
    
+    $user_gmail = $stmt->rowCount();
+
+    $level="50"; 
+    $type="2";
     
-            $level="50"; 
-            $type="2";
-    
-//    switch("$pomen_type")
-//    {
-//        case "Electrician":
-//            $level=50; 
-//            $type=2;
-//            $pomen_type=1;
-//        break;
-//        case "plumber":
-//            $level=50;
-//            $type=2;
-//            $pomen_type=2;
-//        break;
-//        case "mechanic":
-//            $level=50; 
-//            $type=2;
-//            $pomen_type=3;
-//        break;
-//        case "builder":
-//            $level=50;
-//            $type=2;
-//            $pomen_type=4;
-//        break;
-//        case "gardener":
-//            $level=50;
-//            $type=2;
-//            $pomen_type=5;
-//        break;
-//    }
-    
+   
 
     
-  	if (mysqli_num_rows($user_query) > 0) {
-        echo '<script>alert("name already taken")</script>';
-  	}else if(mysqli_num_rows($email_query) > 0){
-  	
-echo '<script>alert("Email already taken")</script>'; 	
+  	if ($user_gmail > 0) {
+        echo '<script>alert("name or gmail already taken")</script>';
   	}else
     {
     $sql = "INSERT INTO user (name,email,password,level,type,pomen) VALUES ('$name','$email','$Password','$level','$type','$pomen_type')";
