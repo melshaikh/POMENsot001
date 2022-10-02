@@ -4,11 +4,13 @@ function printSide($page)
     $index = '';
     $users = '';
     $others = '';
+    $update_profile='';
     switch ($page)
     {
         case 'index':$index = 'class="active"'; break;
         case 'services':$users = 'class="active"'; break;
         case 'others':$others = 'class="active"'; break;
+        case 'others':$update_profile = 'class="active"'; break;
         default : $index = '';
     }
     echo '<div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
@@ -22,6 +24,8 @@ function printSide($page)
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
           <li '.$index.'><a href="index.php"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          </li>
+         <li '.$update_profile.' class=" nav-item"><a href="update_profile.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Update Profile</span></a>
           </li>
           <li '.$users.' class=" nav-item"><a href="services.php"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Services</span></a>
           </li>
