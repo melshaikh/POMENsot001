@@ -98,7 +98,7 @@ if ($_POST["Password"] === $_POST["confirm_password"]) {
             else if($level < 1000 && $level>100 ){header("Location: user/index.php");}//registered user 
 } }
      else {
-            header("location: user_register.php?alert=1");
+            header("location: user_register.php?alert=1");//LOL
         }
 }
 
